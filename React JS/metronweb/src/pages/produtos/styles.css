@@ -1,0 +1,28 @@
+.form-produtos {
+  padding: 20px;
+  margin: 2px;
+  width: 100%;
+}
+
+.div-produtos {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.div-cad-produtos {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.estatistica {
+  width: 100%;
+  height: 100%;
+}
+
+.div-cad-produtos .salvar {
+  background-color: blue;
+  width: 15%;
+}
