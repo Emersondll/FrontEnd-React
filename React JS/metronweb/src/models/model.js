@@ -9,7 +9,7 @@ export const produto = {
   venda: 0,
   quantidade: 1,
   tamanho: "",
-  id:''
+  id: ''
 };
 
 export const tamanho = {
@@ -33,4 +33,15 @@ export const tamanho = {
   t16: false,
   t18: false,
   tu: false
+};
+
+export const cliente = {
+  id: '',
+  nome: '',
+  endereco: '',
+  numero: 0,
+  cidade: '',
+  bairro: '',
+  cep: '',
+  obs: ''
 };
