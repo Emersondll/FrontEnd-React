@@ -1,0 +1,21 @@
+.divButonsDialog{
+    justify-content: space-between; 
+    display: flex; 
+    
+}
+
+.formControl .classesformControl{
+    justify-content: space-between; 
+    display: flex; 
+    
+}
+
+.divformfilter{
+    justify-content: space-between; 
+    display: flex;   
+}
+
+.divCheckBox{
+    justify-content: space-between; 
+    display: flex;   
+}
