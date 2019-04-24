@@ -8,6 +8,8 @@ import TableRow from "@material-ui/core/TableRow";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import Dialog from "@material-ui/core/Dialog";
+import { CSVLink } from "react-csv";
+import Assignment from '@material-ui/icons/GetApp';
 
 import api from "../../../services/api.js";
 import { cliente } from "../../../models/model.js";
@@ -67,6 +69,7 @@ export default class listar extends Component {
           <Dialog open={this.state.open} onClose={this.handleClose}>
             <EditCliente dialogOpen={this.state} />
           </Dialog>
+          <CSVLink data={this.state.arrayList}><Assignment /></CSVLink>
         </div>
 
         <Paper className="paper">
