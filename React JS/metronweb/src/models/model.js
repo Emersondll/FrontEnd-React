@@ -40,7 +40,7 @@ export const cliente = {
   nome: '',
   endereco: '',
   numero: 0,
-  cidade: '',
+  cidade: 'ARARAQUARA',
   bairro: '',
   cep: '',
   obs: ''

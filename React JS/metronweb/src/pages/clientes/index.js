@@ -4,16 +4,14 @@ import Foot from "../../footer";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Cadastrar from './cadastrar/index';
-import Listar from './listar/index';
-
+import Cadastrar from "./cadastrar/index";
+import Listar from "./listar/index";
 
 function TabContainer(props) {
   return props.children;
 }
 
-export default class Clientes extends Component {
-
+export default class clientes extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,11 +23,10 @@ export default class Clientes extends Component {
     this.setState({ value });
   };
 
-
   render() {
     const { value } = this.state;
     return (
-      <div className='clientes'>
+      <div className="clientes">
         <Head />
         <div className="tab-clientes">
           <AppBar position="static">

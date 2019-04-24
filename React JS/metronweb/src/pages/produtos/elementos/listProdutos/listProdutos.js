@@ -50,7 +50,6 @@ export default class listProdutos extends Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked }, () => { });
 
-
   };
 
   handleSubmit = event => {
@@ -200,7 +199,6 @@ export default class listProdutos extends Component {
                   label="Unissex"
                 />
               </FormGroup>
-
             </div>
 
             <form className="formFilterDate" onSubmit={this.handleSubmitDate}>
@@ -216,7 +214,6 @@ export default class listProdutos extends Component {
                 <SearchIcon />
               </IconButton>
             </form>
-
 
             <CSVLink data={this.state.arrayList}><Assignment /></CSVLink>
           </div>
