@@ -5,6 +5,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Cadastrar from './cadastrar/index';
+import Listar from './listar/index';
 
 
 function TabContainer(props) {
@@ -41,7 +42,7 @@ export default class Clientes extends Component {
           {value === 0 && (
             <TabContainer>
               <div className="list-clientes">
-                Listar Clientes
+                <Listar />
               </div>
             </TabContainer>
           )}

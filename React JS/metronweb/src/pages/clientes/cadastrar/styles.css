@@ -1,24 +1,16 @@
-.form-clientes {
+.div-cad-clientes {
+  display: flex;
+  justify-content: space-between;
+}
+
+.div-cad-clientes .div-clientes  {
+  width: 100%;
+  height: 100%;  
+  justify-content: space-between;
+}
+
+.div-cad-clientes .div-clientes .form-clientes {
   padding: 20px;
   margin: 2px;
-  width: 100%;
-}
-
-.div-clientes {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-.div-cad-clientes {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.estatistica {
-  width: 100%;
-  height: 100%;
 }
 

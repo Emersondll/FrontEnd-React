@@ -49,7 +49,6 @@ export default class Cadastrar extends Component {
 
     };
 
-
     render() {
         return (
             <div className="div-cad-clientes">
@@ -70,6 +69,7 @@ export default class Cadastrar extends Component {
                             margin="normal"
                             onChange={this.handleChangeText("endereco")}
                             required
+                            fullWidth
                         />
                         <br />
                         <TextField
@@ -87,6 +87,7 @@ export default class Cadastrar extends Component {
                             margin="normal"
                             onChange={this.handleChangeText("cidade")}
                             required
+                            defaultValue='Araraquara'
                         />
                         <br />
                         <TextField
@@ -97,7 +98,6 @@ export default class Cadastrar extends Component {
                             required
                         />
                         <br />
-                        <br />
                         <TextField
                             id="cep"
                             label="Cep"
@@ -106,7 +106,6 @@ export default class Cadastrar extends Component {
 
                         />
                         <br />
-                        <br />
                         <TextField
                             id="obs"
                             label="Observações"
@@ -114,7 +113,6 @@ export default class Cadastrar extends Component {
                             onChange={this.handleChangeText("obs")}
                             required
                         />
-
                         <p />
                         <Button variant="contained" color="primary" type="submit" className="btn-salvar">
                             Salvar
