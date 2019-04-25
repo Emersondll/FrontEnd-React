@@ -3,32 +3,46 @@ import React, { Component } from "react";
 import SaveIcon from "@material-ui/icons/Save";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 
-import { produto } from "../../../models/model";
+import { produto, cliente } from "../../../models/model";
 import api from "../../../services/api";
 import "./styles.css";
 
 export default class editProduto extends Component {
-
   handleClose = async event => {
     await api
       .delete(`/produto/${produto.id}`)
-      .then(function (response) {
+      .then(function(response) {
         alert("Produto Removido com Sucesso!");
       })
-      .catch(function (error) {
+      .catch(function(error) {
         alert("Erro de Exclusão.\n Procure o administrador: " + error);
       });
+  };
+
+  handleSales = async event => {
+    if (cliente.nome !== "") {
+      await api
+        .put("/produto", { produto, cliente })
+        .then(function(response) {
+          alert("Reservado do Produto!");
+        })
+        .catch(function(error) {
+          alert("Erro ao Reservar.\n Procure o administrador: " + error);
+        });
+    } else {
+      alert("Cliente Não Selecionado");
+    }
   };
 
   handleEdit = async event => {
     await api
       .put("/produto", produto)
-      .then(function (response) {
+      .then(function(response) {
         alert("Atualizado com Sucesso do Produto!");
       })
-      .catch(function (error) {
+      .catch(function(error) {
         alert("Erro ao Atualizar.\n Procure o administrador: " + error);
       });
   };
@@ -85,9 +99,13 @@ export default class editProduto extends Component {
               defaultValue={produto.quantidade}
             />
           </DialogContent>
-          <div className='divButonsDialog'>
+          <div className="divButonsDialog">
             <IconButton onClick={() => this.handleEdit()}>
               <SaveIcon />
+            </IconButton>
+
+            <IconButton onClick={() => this.handleSales()}>
+              <DeleteIcon />
             </IconButton>
 
             <IconButton onClick={() => this.handleClose()}>
