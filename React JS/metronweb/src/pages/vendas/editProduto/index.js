@@ -4,6 +4,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Sales from '@material-ui/icons/Done';
 
 import { produto, cliente } from "../../../models/model";
 import api from "../../../services/api";
@@ -105,7 +106,7 @@ export default class editProduto extends Component {
             </IconButton>
 
             <IconButton onClick={() => this.handleSales()}>
-              <DeleteIcon />
+              <Sales />
             </IconButton>
 
             <IconButton onClick={() => this.handleClose()}>
