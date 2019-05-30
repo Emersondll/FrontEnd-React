@@ -6,44 +6,86 @@ import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Sales from '@material-ui/icons/Done';
 
-import { produto, cliente } from "../../../models/model";
+import { produto, cliente, venda } from "../../../models/model";
 import api from "../../../services/api";
 import "./styles.css";
 
 export default class editProduto extends Component {
+
+  constructor() {
+    super();
+
+    var today = new Date(),
+      date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+
+    this.state = {
+      date: date,
+    };
+  }
+
+
   handleClose = async event => {
     await api
       .delete(`/produto/${produto.id}`)
-      .then(function(response) {
+      .then(function (response) {
         alert("Produto Removido com Sucesso!");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert("Erro de Exclusão.\n Procure o administrador: " + error);
       });
   };
 
   handleSales = async event => {
     if (cliente.nome !== "") {
+      this.setSales();
       await api
-        .put("/produto", { produto, cliente })
-        .then(function(response) {
-          alert("Reservado do Produto!");
+        .post("/venda", venda)
+        .then(function (response) {
+          alert("Produto Vendido!");
+          produto.quantidade--;
+
+          api
+            .put("/produto", produto)
+            .then(function (response) {
+              alert("Atualizado com Sucesso o Produto!");
+            })
+            .catch(function (error) {
+              alert("Erro ao Atualizar após a venda.\n Procure o administrador: " + error);
+            });
+
         })
-        .catch(function(error) {
-          alert("Erro ao Reservar.\n Procure o administrador: " + error);
+        .catch(function (error) {
+          alert("Erro ao Vender.\n Procure o administrador: " + error);
         });
     } else {
       alert("Cliente Não Selecionado");
     }
   };
 
+
+  setSales() {
+    venda.idProduto = produto.id;
+    venda.codigoProduto = produto.codigo;
+    venda.nomeProduto = produto.produto;
+    venda.categoria = produto.categoria;
+    venda.custo = produto.custo;
+    venda.promocao = produto.promocao;
+    venda.venda = produto.venda;
+    venda.quantidade = produto.quantidade;
+    venda.tamanho = produto.tamanho;
+    venda.idCliente = cliente.id;
+    venda.nomeCliente = cliente.nome;
+    venda.motivo = 'Venda';
+    venda.dataAtualizacao = this.state.date;
+  }
+
   handleEdit = async event => {
     await api
       .put("/produto", produto)
-      .then(function(response) {
+      .then(function (response) {
         alert("Atualizado com Sucesso do Produto!");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert("Erro ao Atualizar.\n Procure o administrador: " + error);
       });
   };

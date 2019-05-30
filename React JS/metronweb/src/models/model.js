@@ -45,3 +45,19 @@ export const cliente = {
   cep: '',
   obs: ''
 };
+
+export const venda = {
+  idProduto: '',
+  codigoProduto: '',
+  nomeProduto: '',
+  categoria: '',
+  custo: '',
+  promocao: '',
+  venda: '',
+  quantidade: '',
+  tamanho: '',
+  idCliente: '',
+  nomeCliente: '',
+  motivo: '',
+  dataAtualizacao: ''
+}	

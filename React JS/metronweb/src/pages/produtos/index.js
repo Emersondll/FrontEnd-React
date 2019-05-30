@@ -141,6 +141,7 @@ export default class Produtos extends Component {
                       label="Valor Venda"
                       margin="normal"
                       onChange={this.handleChangeText("venda")}
+                      helperText= {this.state.custo *2}
                       required
                     />
                     <br />
