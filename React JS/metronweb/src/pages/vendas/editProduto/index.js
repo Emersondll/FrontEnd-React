@@ -42,7 +42,7 @@ export default class editProduto extends Component {
         .post("/venda", venda)
         .then(function (response) {
           alert("Produto Vendido!");
-          produto.quantidade--;
+          --produto.quantidade;
 
           api
             .put("/produto", produto)
