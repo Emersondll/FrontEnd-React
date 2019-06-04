@@ -98,9 +98,11 @@ export default class listProdutosVenda extends Component {
 
     /* Validar qual Endpoint chamar*/
     if (filter === "") {
-      responsefilter = await api.get(`/produtos/type/${genero}`);
+
+      responsefilter = await api.get(`/produtoDisponivel/type/${genero}`);
     } else {
-      responsefilter = await api.get(`/produtos/${filter}/${genero}`);
+
+      responsefilter = await api.get(`/produtoDisponivel/${filter}/${genero}`);
     }
 
     this.setState({ arrayList: responsefilter.data });

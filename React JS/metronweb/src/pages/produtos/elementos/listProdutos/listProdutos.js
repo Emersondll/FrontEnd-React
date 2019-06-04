@@ -60,7 +60,7 @@ export default class listProdutos extends Component {
   async handleSearch() {
     let filter = this.state.filter;
     let genero = null;
-    let  responsefilter;
+    let responsefilter;
 
     if (this.state.masculino) {
       genero = "Masculino";
@@ -86,7 +86,6 @@ export default class listProdutos extends Component {
       genero = "Masculino,Feminino,Unissex";
     }
 
-    console.log(filter + "  e ai");
 
     /* Validar qual Endpoint chamar*/
 
@@ -94,10 +93,10 @@ export default class listProdutos extends Component {
       responsefilter = await api.get(`/produtos/type/${genero}`);
     }
 
-    else  {
+    else {
       responsefilter = await api.get(`/produtos/${filter}/${genero}`);
     }
-    
+
 
     this.setState({ arrayList: responsefilter.data });
 
