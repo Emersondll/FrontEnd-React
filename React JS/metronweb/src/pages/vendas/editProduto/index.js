@@ -10,12 +10,13 @@ import { produto, cliente, venda } from "../../../models/model";
 import api from "../../../services/api";
 import "./styles.css";
 
+
 export default class editProduto extends Component {
 
   constructor() {
     super();
 
-    var today = new Date(),
+    const today = new Date(),
       date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
 
     this.state = {
@@ -64,19 +65,28 @@ export default class editProduto extends Component {
 
 
   setSales() {
+    let today = new Date();
+
     venda.idProduto = produto.id;
     venda.codigoProduto = produto.codigo;
     venda.nomeProduto = produto.produto;
     venda.categoria = produto.categoria;
     venda.custo = produto.custo;
     venda.promocao = produto.promocao;
-    venda.venda = produto.venda;
+
+    if (produto.promocao !== 0 && produto.promocao !== '' && produto.promocao !== '0' && produto.promocao !== null) {
+      venda.venda = produto.promocao;
+    } else {
+      venda.venda = produto.venda;
+    }
+
     venda.quantidade = produto.quantidade;
     venda.tamanho = produto.tamanho;
     venda.idCliente = cliente.id;
     venda.nomeCliente = cliente.nome;
     venda.motivo = 'Venda';
     venda.dataAtualizacao = this.state.date;
+    venda.idClienteData = cliente.id.concat(today.getDate()).concat(today.getMonth() + 1).concat(today.getFullYear());
   }
 
   handleEdit = async event => {

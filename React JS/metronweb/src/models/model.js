@@ -59,5 +59,6 @@ export const venda = {
   idCliente: '',
   nomeCliente: '',
   motivo: '',
-  dataAtualizacao: ''
+  dataAtualizacao: '',
+  idClienteData:''
 }	
