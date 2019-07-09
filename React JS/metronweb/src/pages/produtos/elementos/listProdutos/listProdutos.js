@@ -237,6 +237,7 @@ export default class listProdutos extends Component {
             <TableBody>
               {this.state.arrayList.map(arrayListProdutos => (
                 <TableRow key={arrayListProdutos.id}>
+                    
                   <TableCell component="th" scope="row">
                     <IconButton
                       onClick={() => this.handleEdit(arrayListProdutos)}
@@ -245,9 +246,12 @@ export default class listProdutos extends Component {
                     </IconButton>
                   </TableCell>
 
+                  
                   <TableCell component="th" scope="row">
                     {arrayListProdutos.codigo}
                   </TableCell>
+                 
+
                   <TableCell align="right">
                     {arrayListProdutos.produto}
                   </TableCell>

@@ -6,6 +6,8 @@ import Tab from "@material-ui/core/Tab";
 import Head from "../../header";
 import Foot from "../../footer";
 import ListProdutosVenda from "../vendas/ListProduto/index"
+import ListResumeVendas from "../vendas/ListResumeVendas/index"
+import ListReservados from "../vendas/ListReservados"
 
 function TabContainer(props) {
   return props.children;
@@ -31,16 +33,16 @@ export default class Vendas extends Component {
         <div className="tab-clientes">
           <AppBar position="static">
             <Tabs value={value} onChange={this.handleChangeTab}>
-              <Tab label="Listar Vendas" />
+              <Tab label="Resumo Vendas/Recebimentos" />
               <Tab label="Listar Produtos Disponíveis" />
-              <Tab label="Listar Reservados" />
+              <Tab label="Listar Vendas e Reservas" />
               <Tab label="Listar Histórico" />
             </Tabs>
           </AppBar>
 
           {value === 0 && (
             <TabContainer>
-              <div className="list-sales">Listar Vendas</div>
+              <div className="list-sales">< ListResumeVendas /></div>
             </TabContainer>
           )}
           {value === 1 && (
@@ -50,7 +52,7 @@ export default class Vendas extends Component {
           )}
           {value === 2 && (
             <TabContainer>
-              <div className="list-products">Listar Reservados</div>
+              <div className="list-products"><ListReservados /></div>
             </TabContainer>
           )}
           {value === 3 && (

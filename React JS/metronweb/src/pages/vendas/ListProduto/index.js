@@ -16,15 +16,19 @@ import React, { Component } from "react";
 import { CSVLink } from "react-csv";
 import Assignment from "@material-ui/icons/GetApp";
 import MenuItem from "@material-ui/core/MenuItem";
+import { Favorite } from '@material-ui/icons';
 
 import api from "../../../services/api.js";
 import EditProduto from "../editProduto/index";
-import { produto, cliente } from "../../../models/model";
+import { produto, cliente, venda } from "../../../models/model";
 import "./styles.css";
 
 export default class listProdutosVenda extends Component {
   constructor(props) {
     super(props);
+    const today = new Date(),
+      date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+
     this.state = {
       masculino: "",
       feminino: "",
@@ -36,7 +40,9 @@ export default class listProdutosVenda extends Component {
       filterDate: "",
       open: false,
       nome: "",
-      idClient: ""
+      idClient: "",
+      date: date,
+
     };
   }
 
@@ -50,19 +56,19 @@ export default class listProdutosVenda extends Component {
   }
 
   handleChangeText = name => event => {
-    this.setState({ [name]: event.target.value }, () => {});
+    this.setState({ [name]: event.target.value }, () => { });
   };
 
   handleChangeTextClient = name => event => {
-    this.setState({ [name]: event.target.value }, () => {});
-    let auxiliar;    
+    this.setState({ [name]: event.target.value }, () => { });
+    let auxiliar;
     auxiliar = event.target.value.split("-");
     cliente.nome = auxiliar[0];
     cliente.id = auxiliar[1];
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.checked }, () => {});
+    this.setState({ [name]: event.target.checked }, () => { });
   };
 
   handleSubmit = event => {
@@ -119,6 +125,47 @@ export default class listProdutosVenda extends Component {
     this.setState({ arrayList: responsefilter.data });
   }
 
+
+  handleReserv = async event => {
+    if (this.state.nome !== "") {
+      await api
+        .post("/venda", venda)
+        .then(function (response) {
+          alert("Produto Reservado!");
+
+        })
+        .catch(function (error) {
+          alert("Erro ao Reservar.\n Procure o administrador: " + error);
+        });
+    } else {
+      alert("Cliente Não Selecionado");
+    }
+  };
+
+  setReserv(arrayListProdutos) {
+    let today = new Date();
+    venda.idProduto = arrayListProdutos.id;
+    venda.codigoProduto = arrayListProdutos.codigo;
+    venda.nomeProduto = arrayListProdutos.produto;
+    venda.categoria = arrayListProdutos.categoria;
+    venda.custo = arrayListProdutos.custo;
+    venda.promocao = arrayListProdutos.promocao;
+    if (arrayListProdutos.promocao !== 0 && arrayListProdutos.promocao !== '' && arrayListProdutos.promocao !== '0' && arrayListProdutos.promocao !== null) {
+      venda.venda = arrayListProdutos.promocao;
+    } else {
+      venda.venda = arrayListProdutos.venda;
+    }
+
+    venda.quantidade = 1 ;//arrayListProdutos.quantidade;
+    venda.tamanho = arrayListProdutos.tamanho;
+    venda.idCliente = cliente.id;
+    venda.nomeCliente = cliente.nome;
+    venda.motivo = 'Reservado';
+    venda.dataAtualizacao = this.state.date;
+    venda.idClienteData = cliente.id.concat(today.getDate()).concat(today.getMonth() + 1).concat(today.getFullYear());
+    this.handleReserv();
+  }
+
   handleEdit(arrayListProdutos) {
     produto.categoria = arrayListProdutos.categoria;
     produto.codigo = arrayListProdutos.codigo;
@@ -134,7 +181,7 @@ export default class listProdutosVenda extends Component {
     this.handleClickOpen();
   }
 
-  handleClickOpen = () => {
+  handleClickOpen = (props) => {
     this.setState({ open: true });
   };
 
@@ -262,12 +309,19 @@ export default class listProdutosVenda extends Component {
             <TableBody>
               {this.state.arrayList.map(arrayListProdutos => (
                 <TableRow key={arrayListProdutos.id}>
-                  <TableCell component="th" scope="row">
+                  <TableCell >
                     <IconButton
                       onClick={() => this.handleEdit(arrayListProdutos)}
                     >
                       <EditIcon />
                     </IconButton>
+
+                    <IconButton
+                      onClick={() => this.setReserv(arrayListProdutos)}
+                    >
+                      <Favorite />
+                    </IconButton>
+
                   </TableCell>
 
                   <TableCell component="th" scope="row">

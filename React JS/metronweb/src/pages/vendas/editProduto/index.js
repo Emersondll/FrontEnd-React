@@ -4,7 +4,8 @@ import SaveIcon from "@material-ui/icons/Save";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Sales from '@material-ui/icons/Done';
+//import Sales from '@material-ui/icons/Done';
+import { ShoppingCart } from '@material-ui/icons';
 
 import { produto, cliente, venda } from "../../../models/model";
 import api from "../../../services/api";
@@ -13,14 +14,15 @@ import "./styles.css";
 
 export default class editProduto extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     const today = new Date(),
       date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
 
-    this.state = {
+      this.state = {
       date: date,
+      nomeV: props.dialogOpen.nome
     };
   }
 
@@ -37,7 +39,9 @@ export default class editProduto extends Component {
   };
 
   handleSales = async event => {
-    if (cliente.nome !== "") {
+    
+  //  if (cliente.nome !== "") {
+    if (this.state.nomeV!== "") {
       this.setSales();
       await api
         .post("/venda", venda)
@@ -80,7 +84,7 @@ export default class editProduto extends Component {
       venda.venda = produto.venda;
     }
 
-    venda.quantidade = produto.quantidade;
+    venda.quantidade = 1;// produto.quantidade;
     venda.tamanho = produto.tamanho;
     venda.idCliente = cliente.id;
     venda.nomeCliente = cliente.nome;
@@ -150,6 +154,7 @@ export default class editProduto extends Component {
               label="Quantidade"
               margin="normal"
               defaultValue={produto.quantidade}
+              disabled
             />
           </DialogContent>
           <div className="divButonsDialog">
@@ -158,7 +163,7 @@ export default class editProduto extends Component {
             </IconButton>
 
             <IconButton onClick={() => this.handleSales()}>
-              <Sales />
+              <ShoppingCart />
             </IconButton>
 
             <IconButton onClick={() => this.handleClose()}>

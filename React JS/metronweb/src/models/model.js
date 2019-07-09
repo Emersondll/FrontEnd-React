@@ -62,3 +62,9 @@ export const venda = {
   dataAtualizacao: '',
   idClienteData:''
 }	
+
+export const aux = {
+  vendido: false,
+  reservado: false
+}
+
