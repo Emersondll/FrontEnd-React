@@ -1,7 +1,6 @@
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Dialog from "@material-ui/core/Dialog";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -10,16 +9,14 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TextField from "@material-ui/core/TextField";
-import EditIcon from "@material-ui/icons/Edit";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { Component } from "react";
 import { CSVLink } from "react-csv";
 import Assignment from "@material-ui/icons/GetApp";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Favorite } from '@material-ui/icons';
+import { Favorite, ShoppingCart } from '@material-ui/icons';
 
 import api from "../../../services/api.js";
-import EditProduto from "../editProduto/index";
 import { produto, cliente, venda } from "../../../models/model";
 import "./styles.css";
 
@@ -156,7 +153,7 @@ export default class listProdutosVenda extends Component {
       venda.venda = arrayListProdutos.venda;
     }
 
-    venda.quantidade = 1 ;//arrayListProdutos.quantidade;
+    venda.quantidade = 1;//arrayListProdutos.quantidade;
     venda.tamanho = arrayListProdutos.tamanho;
     venda.idCliente = cliente.id;
     venda.nomeCliente = cliente.nome;
@@ -166,7 +163,8 @@ export default class listProdutosVenda extends Component {
     this.handleReserv();
   }
 
-  handleEdit(arrayListProdutos) {
+  setSales(arrayListProdutos) {
+    // Produto
     produto.categoria = arrayListProdutos.categoria;
     produto.codigo = arrayListProdutos.codigo;
     produto.custo = arrayListProdutos.custo;
@@ -178,25 +176,63 @@ export default class listProdutosVenda extends Component {
     produto.tipo = arrayListProdutos.tipo;
     produto.venda = arrayListProdutos.venda;
     produto.id = arrayListProdutos.id;
-    this.handleClickOpen();
+    // Venda
+    let today = new Date();
+    venda.idProduto = arrayListProdutos.id;
+    venda.codigoProduto = arrayListProdutos.codigo;
+    venda.nomeProduto = arrayListProdutos.produto;
+    venda.categoria = arrayListProdutos.categoria;
+    venda.custo = arrayListProdutos.custo;
+    venda.promocao = arrayListProdutos.promocao;
+    if (arrayListProdutos.promocao !== 0 && arrayListProdutos.promocao !== '' && arrayListProdutos.promocao !== '0' && arrayListProdutos.promocao !== null) {
+      venda.venda = arrayListProdutos.promocao;
+    } else {
+      venda.venda = arrayListProdutos.venda;
+    }
+
+    venda.quantidade = 1;//arrayListProdutos.quantidade;
+    venda.tamanho = arrayListProdutos.tamanho;
+    venda.idCliente = cliente.id;
+    venda.nomeCliente = cliente.nome;
+    venda.motivo = 'Venda';
+    venda.dataAtualizacao = this.state.date;
+    venda.idClienteData = cliente.id.concat(today.getDate()).concat(today.getMonth() + 1).concat(today.getFullYear());
+    this.handleSales();
+
   }
 
-  handleClickOpen = (props) => {
-    this.setState({ open: true });
+  handleSales = async event => {
+
+    if (this.state.nome !== "") {
+
+      await api
+        .post("/venda", venda)
+        .then(function (response) {
+          alert("Produto Vendido!");
+          --produto.quantidade;
+
+          api
+            .put("/produto", produto)
+            .then(function (response) {
+              alert("Atualizado com Sucesso o Produto!");
+            })
+            .catch(function (error) {
+              alert("Erro ao Atualizar após a venda.\n Procure o administrador: " + error);
+            });
+
+        })
+        .catch(function (error) {
+          alert("Erro ao Vender.\n Procure o administrador: " + error);
+        });
+    } else {
+      alert("Cliente Não Selecionado");
+    }
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
 
   render() {
     return (
       <div>
-        <div className="dialog">
-          <Dialog open={this.state.open} onClose={this.handleClose}>
-            <EditProduto dialogOpen={this.state} />
-          </Dialog>
-        </div>
 
         <Paper className="paper">
           <div className="divformfilter">
@@ -311,9 +347,9 @@ export default class listProdutosVenda extends Component {
                 <TableRow key={arrayListProdutos.id}>
                   <TableCell >
                     <IconButton
-                      onClick={() => this.handleEdit(arrayListProdutos)}
+                      onClick={() => this.setSales(arrayListProdutos)}
                     >
-                      <EditIcon />
+                      <ShoppingCart />
                     </IconButton>
 
                     <IconButton
