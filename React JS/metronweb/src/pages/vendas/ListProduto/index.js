@@ -1,7 +1,8 @@
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
 import IconButton from "@material-ui/core/IconButton";
+import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,22 +10,23 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TextField from "@material-ui/core/TextField";
+import { Favorite, ShoppingCart } from '@material-ui/icons';
+import Assignment from "@material-ui/icons/GetApp";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { Component } from "react";
 import { CSVLink } from "react-csv";
-import Assignment from "@material-ui/icons/GetApp";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Favorite, ShoppingCart } from '@material-ui/icons';
-
+import { cliente, produto, venda } from "../../../models/model";
 import api from "../../../services/api.js";
-import { produto, cliente, venda } from "../../../models/model";
 import "./styles.css";
+
 
 export default class listProdutosVenda extends Component {
   constructor(props) {
     super(props);
     const today = new Date(),
       date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    const todayH = new Date(),
+      hour = todayH.getHours() + ':' + todayH.getMinutes();
 
     this.state = {
       masculino: "",
@@ -39,6 +41,7 @@ export default class listProdutosVenda extends Component {
       nome: "",
       idClient: "",
       date: date,
+      hours: hour,
 
     };
   }
@@ -321,7 +324,10 @@ export default class listProdutosVenda extends Component {
               ))}
             </TextField>
 
-            <CSVLink data={this.state.arrayList}>
+            <CSVLink
+              data={this.state.arrayList}
+              filename={'Lista de Produtos Disponiveis_' + this.state.date + "--" + this.state.hours + '.csv'}
+              separator={";"} >
               <Assignment />
             </CSVLink>
           </div>

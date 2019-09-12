@@ -1,33 +1,42 @@
 .divResume {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  background-color: cornsilk;
-  }
-
-.divResumeSearchHead{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: cornsilk;
 }
 
-  .divDashBoard {
+.divResumeSearchHead {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.divCenter{
+    padding: 5px;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 8px;
+    
+}
+
+.divDashBoard {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
     background-color: rgb(198, 248, 231);
-  }
+}
 
-
-  .divMain{
+.divMain {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 5px;
     margin: 2px;
-    
-  }
+}
