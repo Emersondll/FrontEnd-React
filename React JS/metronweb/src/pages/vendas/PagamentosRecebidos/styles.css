@@ -1,0 +1,19 @@
+
+.divMain  {
+  
+    justify-content: space-between;
+    align-content: space-between;
+    margin: 10px;
+}
+ 
+.divMain .formasPg {
+    width: 40%;
+    
+    
+}
+.submited{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+

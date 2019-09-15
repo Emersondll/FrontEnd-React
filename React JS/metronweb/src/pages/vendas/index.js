@@ -8,6 +8,7 @@ import Foot from "../../footer";
 import ListProdutosVenda from "../vendas/ListProduto/index"
 import ListResumeVendas from "../vendas/ListResumeVendas/index"
 import ListReservados from "../vendas/ListReservados"
+import PagamentosRecebidos from "../vendas/PagamentosRecebidos"
 
 function TabContainer(props) {
   return props.children;
@@ -36,7 +37,7 @@ export default class Vendas extends Component {
               <Tab label="Resumo Vendas/Recebimentos" />
               <Tab label="Listar Produtos Disponíveis" />
               <Tab label="Listar Vendas e Reservas" />
-              <Tab label="Listar Histórico" />
+              <Tab label="Pagamentos Recebidos" />
             </Tabs>
           </AppBar>
 
@@ -57,7 +58,7 @@ export default class Vendas extends Component {
           )}
           {value === 3 && (
             <TabContainer>
-              <div className="list-products">Listar Histórico</div>
+              <div className="list-products"><PagamentosRecebidos /></div>
             </TabContainer>
           )}
         </div>

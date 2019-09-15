@@ -66,8 +66,8 @@ export default class ListResumeVendas extends Component {
         this.setState({ SomaRecebimento: "" });
         this.setState({ Diferenca: "" });
 
-        let filter = this.state.filter;
-        if (filter.length > 1) {
+        let filter = this.state.filter.trim();
+        if (filter.length >= 1) {
 
             this.handleSearchSales();
             this.handleSearchReceiver();

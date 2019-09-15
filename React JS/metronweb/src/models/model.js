@@ -60,11 +60,32 @@ export const venda = {
   nomeCliente: '',
   motivo: '',
   dataAtualizacao: '',
-  idClienteData:''
-}	
+  idClienteData: ''
+}
 
 export const aux = {
   vendido: false,
   reservado: false
 }
+
+export const recebimento = {
+  dataRecebimento: '',
+  formaPagamento: '',
+  idCliente: '',
+  nomeCliente: '',
+  valor: ''
+
+}
+
+export const formasPagamento = [
+  {
+    value: "Dinheiro"
+  },
+  {
+    value: "Cartão Débito"
+  },
+  {
+    value: "Deposito Bancário"
+  }
+]
 
