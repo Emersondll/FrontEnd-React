@@ -13,10 +13,10 @@ export default class editar extends Component {
   handleClose = async event => {
     await api
       .delete(`/cliente/${cliente.id}`)
-      .then(function(response) {
+      .then(function (response) {
         alert("Cliente Removido com Sucesso!");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert("Erro de Exclusão.\n Procure o administrador: " + error);
       });
   };
@@ -24,10 +24,10 @@ export default class editar extends Component {
   handleEdit = async event => {
     await api
       .put("/cliente", cliente)
-      .then(function(response) {
+      .then(function (response) {
         alert("Atualizado com Sucesso o Cliente!");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert("Erro ao Atualizar.\n Procure o administrador: " + error);
       });
   };
@@ -49,6 +49,7 @@ export default class editar extends Component {
               margin="normal"
               defaultValue={cliente.nome}
               onChange={this.handleChangeText("nome")}
+              required
             />
 
             <TextField
@@ -58,12 +59,14 @@ export default class editar extends Component {
               margin="normal"
               defaultValue={cliente.endereco}
               fullWidth
+              required
             />
 
             <TextField
               id="numero"
               label="Número"
               margin="normal"
+              type="number"
               onChange={this.handleChangeText("numero")}
               defaultValue={cliente.numero}
               required
@@ -75,6 +78,7 @@ export default class editar extends Component {
               margin="normal"
               onChange={this.handleChangeText("cidade")}
               defaultValue={cliente.cidade}
+              required
             />
             <br />
             <TextField
@@ -83,22 +87,26 @@ export default class editar extends Component {
               margin="normal"
               onChange={this.handleChangeText("bairro")}
               defaultValue={cliente.bairro}
+              required
             />
             <br />
             <TextField
-              id="cep"
-              onChange={this.handleChangeText("cep")}
-              label="CEP"
+              id="telefone"
+              onChange={this.handleChangeText("telefone")}
+              label="Telefone"
               margin="normal"
-              defaultValue={cliente.cep}
+              defaultValue={cliente.telefone}
+              type="number"
+              required
             />
             <br />
             <TextField
-              id="obs"
-              onChange={this.handleChangeText("obs")}
-              label="OBS:"
+              id="email"
+              onChange={this.handleChangeText("email")}
+              label="Email:"
               margin="normal"
-              defaultValue={cliente.obs}
+              defaultValue={cliente.email}
+              required
             />
           </DialogContent>
           <div className="divButonsDialog">

@@ -42,8 +42,8 @@ export const cliente = {
   numero: 0,
   cidade: 'ARARAQUARA',
   bairro: '',
-  cep: '',
-  obs: ''
+  telefone: '',
+  email: ''
 };
 
 export const venda = {

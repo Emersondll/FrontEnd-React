@@ -16,7 +16,7 @@ export default class cadastrar extends Component {
       numero: 0,
       cidade: "Araraquara",
       bairro: "",
-      cep: "",
+      telefone: "",
       obs: ""
     };
   }
@@ -28,10 +28,10 @@ export default class cadastrar extends Component {
   handleApi = async event => {
     await api
       .post("/cliente", cliente)
-      .then(function(response) {
+      .then(function (response) {
         alert("Cadastro realizado com Sucesso do Cliente");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert(
           "Erro ao realizar o Cadastro.\n Procure o administrador " + error
         );
@@ -97,17 +97,19 @@ export default class cadastrar extends Component {
             />
             <br />
             <TextField
-              id="cep"
-              label="Cep"
+              id="telefone"
+              label="Telefone"
               margin="normal"
-              onChange={this.handleChangeText("cep")}
+              required
+              type="number"
+              onChange={this.handleChangeText("telefone")}
             />
             <br />
             <TextField
-              id="obs"
-              label="Observações"
+              id="email"
+              label="Email"
               margin="normal"
-              onChange={this.handleChangeText("obs")}
+              onChange={this.handleChangeText("email")}
               required
             />
             <p />

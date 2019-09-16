@@ -26,8 +26,8 @@ export default class listar extends Component {
       numero: 0,
       cidade: "",
       bairro: "",
-      cep: "",
-      obs: "",
+      telefone: "",
+      email: "",
       open: false
     };
   }
@@ -38,7 +38,7 @@ export default class listar extends Component {
   }
 
   handleChangeText = name => event => {
-    this.setState({ [name]: event.target.value }, () => {});
+    this.setState({ [name]: event.target.value }, () => { });
   };
 
   handleEdit(arrayListClientes) {
@@ -48,8 +48,8 @@ export default class listar extends Component {
     cliente.numero = arrayListClientes.numero;
     cliente.cidade = arrayListClientes.cidade.toUpperCase();
     cliente.bairro = arrayListClientes.bairro.toUpperCase();
-    cliente.cep = arrayListClientes.cep.toUpperCase();
-    cliente.obs = arrayListClientes.obs.toUpperCase();
+    cliente.telefone = arrayListClientes.telefone.toUpperCase();
+    cliente.email = arrayListClientes.email.toUpperCase();
     this.handleClickOpen();
   }
 
@@ -82,8 +82,8 @@ export default class listar extends Component {
                 <TableCell align="right">Numero</TableCell>
                 <TableCell align="right">Cidade</TableCell>
                 <TableCell align="right">Bairro</TableCell>
-                <TableCell align="right">Cep</TableCell>
-                <TableCell align="right">Observação</TableCell>
+                <TableCell align="right">Telefone</TableCell>
+                <TableCell align="right">Email</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -101,8 +101,8 @@ export default class listar extends Component {
                   <TableCell align="right">{arrayListClientes.numero}</TableCell>
                   <TableCell align="right">{arrayListClientes.cidade}</TableCell>
                   <TableCell align="right">{arrayListClientes.bairro}</TableCell>
-                  <TableCell align="right">{arrayListClientes.cep}</TableCell>
-                  <TableCell align="right">{arrayListClientes.obs}</TableCell>
+                  <TableCell align="right">{arrayListClientes.telefone}</TableCell>
+                  <TableCell align="right">{arrayListClientes.email}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

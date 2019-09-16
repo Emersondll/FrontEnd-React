@@ -1,19 +1,22 @@
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Assignment from "@material-ui/icons/GetApp";
+import SearchIcon from "@material-ui/icons/Search";
+import TextField from "@material-ui/core/TextField";
 import React, { Component } from "react";
 import { CSVLink } from "react-csv";
-import Assignment from "@material-ui/icons/GetApp";
-
 import { aux } from "../../../models/model";
 import api from "../../../services/api.js";
 import "./styles.css";
+
 
 export default class ListReservados extends Component {
     constructor() {
@@ -21,8 +24,8 @@ export default class ListReservados extends Component {
         this.state = {
             reservado: false,
             vendido: false,
-            arrayList: []
-
+            arrayList: [],
+            filterDate: "",
         };
     }
 
@@ -45,6 +48,21 @@ export default class ListReservados extends Component {
         }
         this.setState({ arrayList: response.data });
     }
+
+    handleSubmitDate = event => {
+        event.preventDefault();
+        this.handleSearchDate();
+    };
+
+    async handleSearchDate() {
+        let filter = this.state.filterDate;
+        const responsefilter = await api.get(`/vendasSaleDate/${filter}`);
+        this.setState({ arrayList: responsefilter.data });
+    }
+
+    handleChangeText = name => event => {
+        this.setState({ [name]: event.target.value }, () => { });
+      };
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.checked }, () => {
@@ -86,6 +104,21 @@ export default class ListReservados extends Component {
 
                             </FormGroup>
                         </div>
+                        <form className="formFilterDate" onSubmit={this.handleSubmitDate}>
+                            <TextField
+                            onSubmit={this.handleSubmitDate}
+                                id="filterDate"
+                                label="Data"
+                                type="search"
+                                className="FiltroTexteFieldDate"
+                                onChange={this.handleChangeText("filterDate")}
+                                margin="normal"
+                            />
+                            <IconButton aria-label="Filter list" type="submit">
+                                <SearchIcon />
+                            </IconButton>
+                        </form>
+
                         <CSVLink data={this.state.arrayList}>
                             <Assignment />
                         </CSVLink>
