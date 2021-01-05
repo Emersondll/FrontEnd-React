@@ -7,7 +7,7 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^3.0.0-alpha.10",
     "anychart-react": "^1.4.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "react": "^16.8.4",
     "react-csv": "^1.1.1",
     "react-dom": "^16.8.4",
